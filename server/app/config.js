@@ -6,7 +6,7 @@ dotenv.config();
 
 export default {
   db: {
-    dbAirbnbURL: process.env.DB_AIRBNB_URL,
+    AirbnbURL: process.env.DB_AIRBNB_URL,
     collection: "sample_airbnb",
     name: "listingsAndReviews",
   },

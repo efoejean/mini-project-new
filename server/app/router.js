@@ -1,4 +1,6 @@
 import Router from "express";
+import config from "./config.js";
+import client from "./loader.js";
 
 const router = new Router();
 
@@ -6,6 +8,11 @@ const router = new Router();
 
 router.get("/", (_, res) => {
     res.send("Hello from api router!");
+  });
+
+  router.get("/current-listings", async (_, res) => {
+    const currentListings = await client.db(config.db.collection).collection(config.db.name).find().toArray();
+    res.json(currentListings);
   });
 
 export default router;

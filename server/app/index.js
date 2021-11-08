@@ -6,7 +6,7 @@ import router from "./router.js";
 
 const app = express();
 
-console.log(config);
+
 app.get("/", (_, res) => {
   res.send("Hello World");
 });
