@@ -5,9 +5,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default {
+  db: {
+    dbAirbnbURL: process.env.DB_AIRBNB_URL,
+    collection: "sample_airbnb",
+    name: "listingsAndReviews",
+  },
+
   port: process.env.PORT || 3000,
-  db:
-    process.env.DB_CLIENT_URL ||
-    // Use localhost if no DB_CLIENT_URL is provided
-    "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000",
 };
