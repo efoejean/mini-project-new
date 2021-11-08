@@ -11,8 +11,10 @@ router.get("/", (_, res) => {
   });
 
   router.get("/current-listings", async (_, res) => {
-    const currentListings = await client.db(config.db.collection).collection(config.db.name).find().toArray();
+    const currentListings = await client.db(config.db.collection).collection(config.db.name).find().limit(1).toArray();
     res.json(currentListings);
   });
+
+  
 
 export default router;
