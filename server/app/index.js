@@ -15,9 +15,7 @@ app.get("/", (_, res) => {
 
 // TODO: Mount the routes (maybe 🤔 /api)
 
-app.use("/api",(_, res) => {
-  res.send("Hello router");
-});
+app.use("/api", router);
 app.listen(config.port, () => {
   console.log(`Server 🏃🏾‍♂️ at: http://localhost:${config.port}`);
 });
