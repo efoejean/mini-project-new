@@ -13,9 +13,15 @@ app.get("/", (_, res) => {
 
 // TODO: Use json middleware (if needed)
 
+app.use(express.json());
+
 // TODO: Mount the routes (maybe 🤔 /api)
 
 app.use("/api", router);
+
+
+
+
 app.listen(config.port, () => {
   console.log(`Server 🏃🏾‍♂️ at: http://localhost:${config.port}`);
 });
