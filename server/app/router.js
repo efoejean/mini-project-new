@@ -21,7 +21,7 @@ router.get("/", (_, res) => {
 
 
   router.get("/listings/:id", async (req, res) => {
- const currentListings = await collection.findOne({_id: ObjectId(req.params.id)});
+ const currentListings = await collection.findOne({_id: (req.params.id)});
     
       res.json(currentListings);
   });
