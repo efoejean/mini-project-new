@@ -34,7 +34,7 @@ router.get("/", (_, res) => {
   })
 
   router.post("/reviews/:id", async (req,res ) =>{
-    const updateReviewById =  await collection.insertOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
+    const updateReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body.payload}});
      res.json(updateReviewById)
   })
 
