@@ -42,7 +42,7 @@ router.get("/", (_, res) => {
      res.json(updateReviewById)
   })
 
-  // Insert new listing
+  // Send a new listing
   router.post("/listings", async (req,res) =>{
     const createNewListing = await collection.insertOne(req.body)
     res.json(createNewListing);
