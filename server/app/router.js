@@ -14,16 +14,23 @@ router.get("/", (_, res) => {
     res.send("Hello from api router!");
   });
 
+  // get the all the listing
   router.get("/listings", async (_, res) => {
     const currentListings = await collection.find().limit(1).toArray();
     res.json(currentListings);
   });
 
-
+// get listing by id
   router.get("/listings/:id", async (req, res) => {
  const currentListings = await collection.findOne({_id: (req.params.id)});
     
       res.json(currentListings);
   });
+
+  // get review by Id.
+  router.get("/reviews/:id", async (req,res ) =>{
+    const currentListings =  await collection.findOne({_id: (req.params.id)});
+     res.json(currentListings.reviews)
+  })
 
 export default router;
