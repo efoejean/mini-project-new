@@ -33,8 +33,12 @@ router.get("/", (_, res) => {
      res.json(listingsById.reviews)
   })
 
+// Post a review by ID
+// use $push to add the review to the array
+// insertOne was giving duplicate Id error, i use update one which make sense since we update the array with a new review
+// UpdateOne using payload give a null in the array. updateOne with req.body works 
   router.post("/reviews/:id", async (req,res ) =>{
-    const updateReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body.payload}});
+    const updateReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
      res.json(updateReviewById)
   })
 
