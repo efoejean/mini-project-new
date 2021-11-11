@@ -16,7 +16,7 @@ router.get("/", (_, res) => {
 
   // get the all the listing
   router.get("/listings", async (_, res) => {
-    const currentListings = await collection.find().limit(1).toArray();
+    const currentListings = await collection.find().limit(3).toArray();
     res.json(currentListings);
   });
 
@@ -40,6 +40,12 @@ router.get("/", (_, res) => {
   router.post("/reviews/:id", async (req,res ) =>{
     const updateReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
      res.json(updateReviewById)
+  })
+
+  // Insert new listing
+  router.post("/listings", async (req,res) =>{
+    const createNewListing = await collection.insertOne(req.body)
+    res.json(createNewListing);
   })
 
 
