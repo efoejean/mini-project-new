@@ -22,15 +22,21 @@ router.get("/", (_, res) => {
 
 // get listing by id
   router.get("/listings/:id", async (req, res) => {
- const currentListings = await collection.findOne({_id: (req.params.id)});
+ const listingsById = await collection.findOne({_id: (req.params.id)});
     
-      res.json(currentListings);
+      res.json(listingsById);
   });
 
   // get review by Id.
   router.get("/reviews/:id", async (req,res ) =>{
-    const currentListings =  await collection.findOne({_id: (req.params.id)});
-     res.json(currentListings.reviews)
+    const listingsById =  await collection.findOne({_id: (req.params.id)});
+     res.json(listingsById.reviews)
   })
+
+  
+
+
+
+
 
 export default router;
