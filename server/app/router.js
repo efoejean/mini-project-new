@@ -70,5 +70,12 @@ router.put("/reviews/:id", async (req,res) => {
   res.json(updateReview);
 })
 
+// delete a review
+// https://docs.mongodb.com/manual/reference/operator/update/pull/
+router.delete("/reviews/:id", async (req,res) => {
+  const deleteReview = await collection.updateOne( {_id: req.params.id, "reviews._id": req.body.id},       
+  { $pull: { "reviews": { '_id': req.body.id}}})
+  res.json(deleteReview);
+})
 
 export default router;
