@@ -1,7 +1,7 @@
 import Router from "express";
 import config from "./config.js";
 import client from "./loader.js";
-import { ObjectId } from "mongodb";
+
 
 const collection =  client.db(config.db.collection).collection(config.db.name);
 const router = new Router();
@@ -53,6 +53,14 @@ router.put("/listings", async (req,res) => {
   const updateListing = await collection.updateOne({_id: req.body.id}, 
   {$set: req.body.payload})
   res.json(updateListing);
+})
+
+
+// Delete a listing
+
+router.delete("/listings", async (req,res) =>{
+  const deleteListing = await collection.deleteOne({_id: (req.body.id)});
+  res.json(deleteListing);
 })
 
 
