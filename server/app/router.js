@@ -16,7 +16,7 @@ router.get("/", (_, res) => {
 
   // get the all the listing
   router.get("/listings", async (_, res) => {
-    const currentListings = await collection.find().limit(3).toArray();
+    const currentListings = await collection.find().limit(1).toArray();
     res.json(currentListings);
   });
 
@@ -36,10 +36,10 @@ router.get("/", (_, res) => {
 // Post a review by ID
 // use $push to add the review to the array
 // insertOne was giving duplicate Id error, i use update one which make sense since we update the array with a new review
-// UpdateOne using payload give a null in the array. updateOne with req.body works 
+// UpdateOne using payload give a null in the array we didnt provide a payload. updateOne with req.body works
   router.post("/reviews/:id", async (req,res ) =>{
-    const updateReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
-     res.json(updateReviewById)
+    const postReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
+     res.json(postReviewById)
   })
 
   // Send a new listing
@@ -48,9 +48,12 @@ router.get("/", (_, res) => {
     res.json(createNewListing);
   })
 
-
-
-
+// Update a listing
+router.put("/listings", async (req,res) => {
+  const updateListing = await collection.updateOne({_id: req.body.id}, 
+  {$set: req.body.payload})
+  res.json(updateListing);
+})
 
 
 export default router;
