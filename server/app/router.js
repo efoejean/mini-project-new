@@ -15,8 +15,14 @@ router.get("/", (_, res) => {
   });
 
   // get the all the listing
-  router.get("/listings", async (_, res) => {
-    const currentListings = await collection.find().limit(1).toArray();
+  router.get("/listings", async (req, res) => {
+    // reduce every entries into one object to make dynamic
+    const parmsFilter = Object.entries(req.query).reduce((acc, [key, value]) => {
+      acc[key] = {$regex: value, $options: "i"};
+      return acc;
+    }, {});
+
+    const currentListings = await collection.find( parmsFilter).limit(7).toArray(); // pass parmsFilter as augment in the find.
     res.json(currentListings);
   });
 
