@@ -2,13 +2,8 @@ import Router from "express";
 import config from "./config.js";
 import client from "./loader.js";
 
-
 const collection =  client.db(config.db.collection).collection(config.db.name);
 const router = new Router();
-
-
-
-// TODO: Add routes here (maybe 🤔 start with a GET test route)
 
 router.get("/", (_, res) => {
     res.send("Hello from api router!");
@@ -16,7 +11,7 @@ router.get("/", (_, res) => {
 
   // get the all the listing
   router.get("/listings", async (req, res) => {
-    // reduce every entries into one object to make dynamic
+    // reduce  entries into one object to make dynamic
     const parmsFilter = Object.entries(req.query).reduce((acc, [key, value]) => {
       acc[key] = {$regex: value, $options: "i"};
       return acc;
@@ -42,7 +37,7 @@ router.get("/", (_, res) => {
 // Post a review by ID
 // use $push to add the review to the array
 // insertOne was giving duplicate Id error, i use update one which make sense since we update the array with a new review
-// UpdateOne using payload give a null in the array we didnt provide a payload. updateOne with req.body works
+// UpdateOne using payload give a null in the array i didnt provide a payload. updateOne with req.body works
   router.post("/reviews/:id", async (req,res ) =>{
     const postReviewById =  await collection.updateOne({_id: (req.params.id)}, {$push: {reviews: req.body}});
      res.json(postReviewById)
@@ -60,7 +55,6 @@ router.put("/listings", async (req,res) => {
   {$set: req.body.payload})
   res.json(updateListing);
 })
-
 
 // Delete a listing
 
