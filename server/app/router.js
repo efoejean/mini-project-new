@@ -63,5 +63,12 @@ router.delete("/listings", async (req,res) =>{
   res.json(deleteListing);
 })
 
+// update a review
+// https://docs.mongodb.com/manual/reference/operator/update/positional/
+router.put("/reviews/:id", async (req,res) => {
+  const updateReview = await collection.updateOne({_id: req.params.id, "reviews._id" : req.body.id}, {$set: {"reviews.$": req.body.payload}})
+  res.json(updateReview);
+})
+
 
 export default router;
